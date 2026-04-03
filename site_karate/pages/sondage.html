@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sondage - SEK Karate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h1>Sport Ensemble Karate</h1>
+</header>
+
+<nav>
+    <a href="../index.html">Accueil</a>
+    <a href="inscriptions.html">Inscription</a>
+    <a href="login.html">Connexion</a>
+</nav>
+
+<main class="container-sondage">
+    <section class="poll-box">
+        <h2>Votre avis compte</h2>
+        <p>Aidez l'association SEK à évoluer en répondant à ce court questionnaire.</p>
+        
+        <div class="google-form-container">
+            <div id="loader" class="loader-container">
+                <div class="belt-spinner"></div>
+                <p>Chargement du formulaire...</p>
+            </div>
+
+            <iframe 
+                id="googleForm"
+                src="https://docs.google.com/forms/d/e/1FAIpQLSfaVKqgPSbWRvijmC43IYJwg06Rc9AGOwydqkfL8YMos2gXMQ/viewform?usp=sf_link" 
+                width="100%" 
+                height="800" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0">
+                Chargement...
+            </iframe>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>2026 - SEK Karate</p>
+</footer>
+
+<script>
+    const iframe = document.getElementById('googleForm');
+    const loader = document.getElementById('loader');
+
+    if (iframe) {
+        iframe.onload = function() {
+            loader.style.display = 'none';
+            iframe.style.display = 'block';
+        };
+    }
+</script>
+
+</body>
+</html>
