@@ -333,3 +333,43 @@ footer {
     75% { transform: translateX(-5px); }
     100% { transform: translateX(0); }
 }
+/* --- Mise en page Colonnes (News + Widget) --- */
+.main-content-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px; /* News à gauche, Widget 280px à droite */
+    gap: 30px;
+    align-items: start;
+}
+
+/* On ajuste le widget pour qu'il ne soit pas trop imposant */
+.cdk-widget {
+    margin-top: 20px !important; /* On annule le gros margin-top précédent */
+    position: sticky;
+    top: 100px; /* Le widget reste visible quand on scrolle */
+}
+
+/* Responsive : sur mobile, on repasse sur une seule colonne */
+@media (max-width: 900px) {
+    .main-content-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .cdk-widget {
+        position: static;
+    }
+}
+
+/* Correction pour les images avec logo */
+.image-with-logo {
+    position: relative;
+    width: 100%;
+    height: 180px; /* Taille fixe pour l'harmonie */
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.image-with-logo img:not(.black-belt-logo) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* L'image remplit la zone sans se déformer */
+}
