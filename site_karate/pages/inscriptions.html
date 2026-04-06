@@ -40,28 +40,30 @@
             </div>
 
             <div class="input-group">
+                <label for="grade">Votre grade actuel</label>
+                <select id="grade" name="grade_id" required>
+                    <option value="">-- Choisir un grade --</option>
+                    <option value="1">Ceinture Blanche</option>
+                    <option value="2">Ceinture Jaune</option>
+                    <option value="3">Ceinture Orange</option>
+                    <option value="4">Ceinture Verte</option>
+                    <option value="5">Ceinture Bleue</option>
+                    <option value="6">Ceinture Marron</option>
+                    <option value="7">Ceinture Noire</option>
+                </select>
+            </div>
+
+            <div class="input-group-checkbox" style="margin: 15px 0; display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" id="parent" name="est_parent" value="1" style="width: auto;">
+                <label for="parent" style="margin-bottom: 0; cursor: pointer;">Je suis un parent d'élève</label>
+            </div>
+
+            <div class="input-group">
                 <label for="mdp">Mot de passe</label>
                 <input type="password" id="mdp" name="password" required minlength="8">
                 <span class="error-msg" id="error-mdp"></span>
             </div>
-            <div class="input-group">
-    <label for="grade">Votre grade actuel</label>
-    <select id="grade" name="grade_id" required>
-        <option value="">-- Choisir un grade --</option>
-        <option value="1">Ceinture Blanche</option>
-        <option value="2">Ceinture Jaune</option>
-        <option value="3">Ceinture Orange</option>
-        <option value="4">Ceinture Verte</option>
-        <option value="5">Ceinture Bleue</option>
-        <option value="6">Ceinture Marron</option>
-        <option value="7">Ceinture Noire</option>
-    </select>
-</div>
 
-<div class="input-group-checkbox" style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-    <input type="checkbox" id="parent" name="est_parent" value="1" style="width: auto;">
-    <label for="parent" style="margin-bottom: 0;">Je suis un parent d'élève</label>
-</div>
             <button type="submit" class="btn-martial">S'inscrire</button>
         </form>
     </section>
@@ -74,14 +76,10 @@
 <script src="../js/validation.js"></script>
 
 <script>
-    // Petit script pour détecter si on revient de traitement.php avec un succès
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('success')) {
         const banner = document.getElementById('success-banner');
         banner.innerHTML = "<p style='color: green; text-align: center; font-weight: bold; margin-bottom: 20px;'>Oss ! Inscription réussie. Vous pouvez vous connecter.</p>";
-        
-        // Optionnel : masquer le formulaire après succès
-        // document.getElementById('inscriptionForm').style.display = 'none';
     }
     
     if (urlParams.has('error')) {

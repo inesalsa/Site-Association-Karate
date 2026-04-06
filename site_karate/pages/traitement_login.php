@@ -1,31 +1,27 @@
 <?php
-// On démarre la session pour "connecter" l'utilisateur
 session_start();
-
-// On inclut la config (port 3306, mdp vide pour XAMPP)
 require_once('../config.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $mdp = $_POST['password'];
 
-    // 1. On cherche l'utilisateur par son email
+    // On récupère tout, y compris les nouvelles colonnes
     $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch();
 
-    // 2. On vérifie si l'utilisateur existe ET si le mot de passe est correct
     if ($user && password_verify($mdp, $user['mot_de_passe'])) {
-        
-        // 3. Succès ! On stocke les infos dans la SESSION
+        // On stocke les infos vitales en session
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['nom'] = $user['nom'];
+        $_SESSION['grade_id'] = $user['grade_id'];
+        $_SESSION['est_parent'] = $user['est_parent'];
 
-        // Redirection vers l'accueil
-        header("Location: ../index.html?login=success");
+        // Redirection vers le profil au lieu de l'accueil pour tester
+        header("Location: profil.php"); 
         exit();
     } else {
-        // 4. Échec : on renvoie vers le login avec un message d'erreur
         header("Location: login.html?error=1");
         exit();
     }
