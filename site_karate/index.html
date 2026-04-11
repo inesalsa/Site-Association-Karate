@@ -19,7 +19,6 @@
     </nav>
 
 <script>
-    // On demande au PHP si un utilisateur est connecté
     fetch('pages/get_user.php')
         .then(response => response.json())
         .then(data => {
@@ -27,16 +26,17 @@
             const title = document.getElementById('welcome-title');
 
             if (data.loggedin) {
-                // 1. On change le titre
+                
                 title.innerText = "Bienvenue, " + data.nom;
 
-                // 2. On affiche les menus pour les membres
+                
                 nav.innerHTML += `
+                    <a href="profile.php">🥋 Mon Profil</a>
                     <a href="pages/sondage.html">Sondage</a>
-                    <a href="pages/logout.php" style="color: #bc002d;">Déconnexion</a>
+                    <a href="pages/logout.php" style="color: #bc002d; font-weight:bold;">Déconnexion</a>
                 `;
             } else {
-                // 3. On affiche les menus pour les visiteurs
+                
                 nav.innerHTML += `
                     <a href="pages/inscriptions.html">Inscription</a>
                     <a href="pages/login.html">Connexion</a>
@@ -55,7 +55,7 @@
 
         <aside class="cdk-widget reveal">
             <div class="cdk-header">Partenaire Officiel</div>
-            <img src="img\Logo CDK95.png" alt="Logo CDK95" style="max-width: 150px; height: auto; margin: 15px 0;">
+            <img src="img/Logo CDK95.png" alt="Logo CDK95" style="max-width: 150px; height: auto; margin: 15px 0;">
             <p>Consultez le calendrier des compétitions du Val d'Oise.</p>
             <a href="https://www.ffkarate.fr/" target="_blank" class="btn-cdk">Voir le calendrier</a>
         </aside>

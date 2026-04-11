@@ -1,14 +1,14 @@
 <?php
 session_start();
-require_once('../config.php');
+require_once('config.php');
 
-// Sécurité : si pas connecté, retour au login
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.html");
     exit();
 }
 
-// On récupère les infos du grade avec une jointure
+
 $stmt = $pdo->prepare("
     SELECT u.*, g.nom_grade 
     FROM utilisateurs u 
@@ -24,7 +24,7 @@ $user = $stmt->fetch();
 <head>
     <meta charset="UTF-8">
     <title>Mon Espace - SEK Karate</title>
-    <link rel="stylesheet" href="../css/style.css"> <style>
+    <link rel="stylesheet" href="css/style.css"> <style>
         .profile-card {
             background: white;
             padding: 30px;
@@ -55,7 +55,7 @@ $user = $stmt->fetch();
 </header>
 
 <nav>
-    <a href="../index.html">Accueil</a>
+    <a href="index.html">Accueil</a>
     <a href="logout.php">Déconnexion</a>
 </nav>
 
@@ -74,9 +74,26 @@ $user = $stmt->fetch();
             </span>
         </div>
 
-        <div class="news-section">
-            <h3>Vos documents</h3>
-            <p>Retrouvez bientôt ici vos convocations aux passages de grades.</p>
+        <div class="documents-section" style="margin-top: 30px; text-align: left; border-top: 2px dashed #eee; padding-top: 20px;">
+            <h3><i class="fas fa-file-pdf"></i> Mes Documents officiels</h3>
+            <ul style="list-style: none; padding: 0;">
+                
+                <li style="margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; background: #f8f8f8; padding: 10px; border-radius: 5px;">
+                    <span>🥋 Convocation Passage de Grade (Juin 2026)</span>
+                    <a href="documents/convocation_avril.pdf" target="_blank" class="btn-martial" style="padding: 5px 10px; font-size: 0.8em; text-decoration: none;">Télécharger</a>
+                </li>
+
+                <?php if($user['est_parent']): ?>
+                <li style="margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; background: #fff5f5; padding: 10px; border-radius: 5px; border: 1px solid var(--rouge-karate);">
+                    <span>👨‍👩‍👧‍👦 Autorisation parentale (Compétition)</span>
+                    <a href="documents/autorisation_parentale.pdf" target="_blank" class="btn-martial" style="padding: 5px 10px; font-size: 0.8em; text-decoration: none;">Télécharger</a>
+                <?php endif; ?>
+
+                <li style="margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; background: #f8f8f8; padding: 10px; border-radius: 5px;">
+                    <span>📜 Règlement intérieur du Dojo</span>
+                    <a href="documents/reglement.pdf" target="_blank" class="btn-martial" style="padding: 5px 10px; font-size: 0.8em; text-decoration: none;">Voir le PDF</a>
+                </li>
+            </ul>
         </div>
     </div>
 </main>

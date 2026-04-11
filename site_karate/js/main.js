@@ -86,9 +86,32 @@ window.addEventListener("mousemove", (e) => {
     dot.style.left = `${posX}px`;
     dot.style.top = `${posY}px`;
 
-    // L'outline suit avec un petit délai pour la fluidité
+    
     outline.animate({
         left: `${posX}px`,
         top: `${posY}px`
     }, { duration: 500, fill: "forwards" });
+});
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Vérification de la session...");
+
+    fetch('pages/get_user.php')
+        .then(response => response.json())
+        .then(data => {
+            console.log("Réponse du serveur :", data); 
+
+            if (data.loggedin) {
+                const navLinks = document.querySelectorAll('nav a');
+                navLinks.forEach(link => {
+                    
+                    if (link.href.includes('login.html')) {
+                        link.innerHTML = "🥋 Mon Profil";
+                        link.href = "profile.php"; 
+                        link.style.color = "#bc002d"; 
+                        link.style.fontWeight = "bold";
+                    }
+                });
+            }
+        })
+        .catch(error => console.error('Erreur Fetch :', error));
 });
