@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sport Ensemble Karate</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>  
+
+<header>
+    <h1 id="welcome-title">Bienvenue sur le site de l'association SEK</h1>
+</header>
+
+<nav id="main-nav">
+    <a href="index.html">Accueil</a>
+    </nav>
+
+<script>
+    fetch('pages/get_user.php')
+        .then(response => response.json())
+        .then(data => {
+            const nav = document.getElementById('main-nav');
+            const title = document.getElementById('welcome-title');
+
+            if (data.loggedin) {
+                // 1. On personnalise le titre
+                title.innerText = "Bienvenue, " + data.nom;
+
+                // 2. On affiche les menus pour les membres (ajout de Mon Profil)
+                nav.innerHTML += `
+                    <a href="profile.php">🥋 Mon Profil</a>
+                    <a href="pages/sondage.html">Sondage</a>
+                    <a href="pages/logout.php" style="color: #bc002d; font-weight:bold;">Déconnexion</a>
+                `;
+            } else {
+                // 3. On affiche les menus pour les visiteurs
+                nav.innerHTML += `
+                    <a href="pages/inscriptions.html">Inscription</a>
+                    <a href="pages/login.html">Connexion</a>
+                `;
+            }
+        })
+        .catch(error => console.error('Erreur de session:', error));
+</script>
+
+<main>
+    <div class="main-content-layout">
+        <section class="news-section reveal">
+            <h2>Dernières Actualités</h2>
+            <div id="news-container" class="news-grid"></div>
+        </section>
+
+        <aside class="cdk-widget reveal">
+            <div class="cdk-header">Partenaire Officiel</div>
+            <img src="img/Logo CDK95.png" alt="Logo CDK95" style="max-width: 150px; height: auto; margin: 15px 0;">
+            <p>Consultez le calendrier des compétitions du Val d'Oise.</p>
+            <a href="https://www.ffkarate.fr/" target="_blank" class="btn-cdk">Voir le calendrier</a>
+        </aside>
+    </div> <section class="stats-section reveal">
+        <div class="stat-item">
+            <span class="stat-number" data-target="68">54</span>
+            <p>Adhérents</p>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" data-target="17">12</span>
+            <p>Médailles cette année</p>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" data-target="50">5</span>
+            <p>Ceintures Noires</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>2026 - SEK Karate</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

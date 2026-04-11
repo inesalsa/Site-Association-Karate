@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - SEK Karate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h1>Sport Ensemble Karate</h1>
+</header>
+
+<nav>
+    <a href="../index.html">Accueil</a>
+    <a href="login.html">Connexion</a>
+    <a href="sondage.html">Sondage</a>
+</nav>
+
+<main class="container-form">
+    <section class="form-box">
+        <h2>Créer un compte</h2>
+        <p>Rejoignez notre association en quelques clics.</p>
+        
+        <div id="success-banner"></div>
+
+        <form id="inscriptionForm" action="traitement.php" method="POST">
+            <div class="input-group">
+                <label for="nom">Nom complet</label>
+                <input type="text" id="nom" name="nom" required placeholder="Ex: Alice Martin">
+                <span class="error-msg" id="error-nom"></span>
+            </div>
+            
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="nom@exemple.com">
+                <span class="error-msg" id="error-email"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="grade">Votre grade actuel</label>
+                <select id="grade" name="grade_id" required>
+                    <option value="">-- Choisir un grade --</option>
+                    <option value="1">Ceinture Blanche</option>
+                    <option value="2">Ceinture Jaune</option>
+                    <option value="3">Ceinture Orange</option>
+                    <option value="4">Ceinture Verte</option>
+                    <option value="5">Ceinture Bleue</option>
+                    <option value="6">Ceinture Marron</option>
+                    <option value="7">Ceinture Noire</option>
+                </select>
+            </div>
+
+            <div class="input-group-checkbox" style="margin: 15px 0; display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" id="parent" name="est_parent" value="1" style="width: auto;">
+                <label for="parent" style="margin-bottom: 0; cursor: pointer;">Je suis un parent d'élève</label>
+            </div>
+
+            <div class="input-group">
+                <label for="mdp">Mot de passe</label>
+                <input type="password" id="mdp" name="password" required minlength="8">
+                <span class="error-msg" id="error-mdp"></span>
+            </div>
+
+            <button type="submit" class="btn-martial">S'inscrire</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>2026 - SEK Karate</p>
+</footer>
+
+<script src="../js/validation.js"></script>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('success')) {
+        const banner = document.getElementById('success-banner');
+        banner.innerHTML = "<p style='color: green; text-align: center; font-weight: bold; margin-bottom: 20px;'>Oss ! Inscription réussie. Vous pouvez vous connecter.</p>";
+    }
+    
+    if (urlParams.has('error')) {
+        const banner = document.getElementById('success-banner');
+        banner.innerHTML = "<p style='color: var(--rouge-karate); text-align: center; font-weight: bold; margin-bottom: 20px;'>Erreur : Cet email est déjà utilisé.</p>";
+    }
+</script>
+
+</body>
+</html>

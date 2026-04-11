@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - SEK Karate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h1>Sport Ensemble Karate</h1>
+</header>
+
+<nav>
+    <a href="../index.html">Accueil</a>
+    <a href="inscriptions.html">Inscription</a>
+    <a href="sondage.html">Sondage</a>
+</nav>
+
+<main class="container-form">
+    <section class="form-box">
+        <h2>Connexion</h2>
+        <p>Heureux de vous revoir au Dojo !</p>
+
+        <div id="error-message"></div>
+
+        <form action="traitement_login.php" method="POST">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="votre@email.com">
+            </div>
+            <div class="input-group">
+                <label for="mdp">Mot de passe</label>
+                <input type="password" id="mdp" name="password" required>
+            </div>
+            <button type="submit" class="btn-martial">Se connecter</button>
+        </form>
+
+        <div class="footer-link" style="margin-top:20px; text-align:center;">
+            Pas encore de compte ? <a href="inscriptions.html">Inscrivez-vous ici</a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>2026 - SEK Karate</p>
+</footer>
+
+<script>
+    // Script pour afficher une erreur si les identifiants sont faux (redirigé depuis traitement_login.php)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('error')) {
+        document.getElementById('error-message').innerHTML = 
+            "<p style='color: #bc002d; text-align: center; font-weight: bold; margin-bottom: 15px;'>Email ou mot de passe incorrect.</p>";
+    }
+</script>
+
+</body>
+</html>
